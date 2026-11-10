@@ -1,0 +1,18 @@
+---
+layout: default
+---
+<section class="hero-obiettivo mb-5" aria-labelledby="titolo-home">
+  <h1 id="titolo-home" class="titolo-pagina mb-4">{{ site.obiettivo.titolo }}</h1>
+  <p class="lead">{{ site.obiettivo.descrizione }}</p>
+  {% if site.obiettivo.cta.testo != blank %}
+  <a class="btn btn-primary" href="{{ site.obiettivo.cta.url | relative_url }}">{{ site.obiettivo.cta.testo }}</a>
+  {% endif %}
+</section>
+{{ content }}
+{% for s in site.obiettivo.sezioni_home %}
+  {% case s %}
+    {% when 'progetti' %}{% include sezione-progetti.html %}
+    {% when 'articoli' %}{% include sezione-articoli.html %}
+    {% when 'competenze' %}{% include sezione-competenze.html %}
+  {% endcase %}
+{% endfor %}

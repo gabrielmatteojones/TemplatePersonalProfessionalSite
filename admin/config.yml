@@ -1,0 +1,128 @@
+# Pannello di amministrazione (Decap CMS) per il sito Jekyll.
+
+backend:
+  name: github
+  repo: UTENTE/REPOSITORY      # ← CAMBIA: il tuo repository GitHub
+  branch: main
+
+# In locale: avvia "npx decap-server" in un secondo terminale e apri /admin/
+local_backend: true
+
+locale: it
+media_folder: "assets/img/uploads"
+public_folder: "/assets/img/uploads"
+
+collections:
+
+  # ── Impostazioni: modifica _config.yml (identità, obiettivo, menu) ──
+  - name: impostazioni
+    label: "Impostazioni del sito"
+    files:
+      - name: config
+        label: "Configurazione generale"
+        file: "_config.yml"
+        fields:
+          - label: "Identità"
+            name: sito
+            widget: object
+            fields:
+              - { label: "Nome", name: nome, widget: string }
+              - { label: "Ruolo o professione", name: ruolo, widget: string, required: false }
+              - { label: "Descrizione per i motori di ricerca", name: descrizione, widget: text }
+              - { label: "Logo", name: logo, widget: image, required: false }
+              - { label: "Testo della fascia grigia in alto", name: slim, widget: string, required: false }
+              - { label: "Link della fascia grigia", name: slim_url, widget: string, required: false }
+          - label: "Obiettivo del sito (home)"
+            name: obiettivo
+            widget: object
+            fields:
+              - { label: "Titolo", name: titolo, widget: string }
+              - { label: "Presentazione", name: descrizione, widget: text }
+              - label: "Pulsante principale"
+                name: cta
+                widget: object
+                fields:
+                  - { label: "Testo", name: testo, widget: string, required: false }
+                  - { label: "Indirizzo", name: url, widget: string, required: false }
+              - { label: "Sezioni mostrate in home", name: sezioni_home, widget: select, multiple: true, options: [progetti, articoli, competenze] }
+          - label: "Header"
+            name: header
+            widget: object
+            fields:
+              - { label: "Mostra la ricerca", name: ricerca, widget: boolean, default: true }
+              - { label: "Etichetta del menu contatti", name: contatti_etichetta, widget: string }
+          - label: "Menu di navigazione"
+            name: menu
+            widget: list
+            summary: "{{fields.titolo}}"
+            fields:
+              - { label: "Titolo", name: titolo, widget: string }
+              - { label: "Indirizzo", name: url, widget: string, required: false }
+              - label: "Voci del sottomenu"
+                name: figli
+                widget: list
+                required: false
+                summary: "{{fields.titolo}}"
+                fields:
+                  - { label: "Titolo", name: titolo, widget: string }
+                  - { label: "Indirizzo", name: url, widget: string }
+          - label: "Contatti e social"
+            name: social
+            widget: list
+            summary: "{{fields.nome}}"
+            fields:
+              - { label: "Nome", name: nome, widget: string }
+              - { label: "Indirizzo (https://… oppure mailto:…)", name: url, widget: string }
+              - { label: "Icona", name: icona, widget: select, options: [mail, link], default: link }
+          - { label: "Competenze", name: competenze, widget: list, required: false }
+          - label: "Piè di pagina"
+            name: footer
+            widget: object
+            fields:
+              - { label: "Testo", name: testo, widget: string, required: false }
+
+  # ── Articoli ──
+  - name: articoli
+    label: "Articoli"
+    folder: "_posts"
+    extension: "md"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Titolo", name: title, widget: string }
+      - { label: "Data di pubblicazione", name: date, widget: datetime }
+      - { label: "Descrizione breve", name: description, widget: text, required: false }
+      - { label: "Tag", name: tag, widget: list, required: false }
+      - { label: "Testo", name: body, widget: markdown }
+
+  # ── Progetti ──
+  - name: progetti
+    label: "Progetti"
+    folder: "_progetti"
+    extension: "md"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Titolo", name: title, widget: string }
+      - { label: "Anno", name: anno, widget: number, value_type: int }
+      - { label: "Descrizione breve", name: descrizione, widget: text }
+      - { label: "Tag", name: tag, widget: list, required: false }
+      - { label: "Link esterno", name: link, widget: string, required: false }
+      - { label: "Testo", name: body, widget: markdown }
+
+  # ── Pagine fisse ──
+  - name: pagine
+    label: "Pagine"
+    files:
+      - name: chi-sono
+        label: "Chi sono"
+        file: "chi-sono.md"
+        fields:
+          - { label: "Titolo", name: title, widget: string }
+          - { label: "Testo", name: body, widget: markdown }
+      - name: contatti
+        label: "Contatti"
+        file: "contatti.md"
+        fields:
+          - { label: "Titolo", name: title, widget: string }
+          - { label: "Testo", name: body, widget: markdown }

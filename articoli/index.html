@@ -1,0 +1,17 @@
+---
+layout: page
+title: Articoli
+permalink: /articoli/
+---
+<div class="elenco">
+{% for post in site.posts %}
+  <article class="elenco-voce">
+    <h2 class="h5 mb-1"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+    <p class="mb-1">{{ post.description | default: post.excerpt | strip_html | truncate: 200 }}</p>
+    <p class="testo-secondario mb-0">{% include data.html data=post.date %}</p>
+  </article>
+{% else %}
+  <p>Nessun articolo pubblicato.</p>
+{% endfor %}
+</div>
+<p class="mt-4"><a href="{{ '/feed.xml' | relative_url }}">Iscriviti al feed RSS</a></p>

@@ -1,0 +1,16 @@
+---
+layout: default
+---
+<nav class="breadcrumb-container" aria-label="Percorso di navigazione"><ol class="breadcrumb">
+  <li class="breadcrumb-item"><a href="{{ '/' | relative_url }}">Home</a><span class="separator" aria-hidden="true">/</span></li>
+  <li class="breadcrumb-item"><a href="{{ '/progetti/' | relative_url }}">Progetti</a><span class="separator" aria-hidden="true">/</span></li>
+  <li class="breadcrumb-item active" aria-current="page">{{ page.title }}</li>
+</ol></nav>
+<article>
+  <h1 class="titolo-pagina mb-3">{{ page.title }}</h1>
+  <p class="mb-4">{% if page.anno %}<span class="testo-secondario">{{ page.anno }}</span> {% endif %}{% for t in page.tag %}<span class="etichetta">{{ t }}</span> {% endfor %}</p>
+  {% if page.descrizione %}<p class="lead">{{ page.descrizione }}</p>{% endif %}
+  <div class="contenuto">{{ content }}</div>
+  {% if page.link %}<p class="mt-4"><a class="btn btn-primary" href="{{ page.link }}">Vai al progetto</a></p>{% endif %}
+</article>
+<p class="mt-5"><a href="{{ '/progetti/' | relative_url }}">Tutti i progetti</a></p>

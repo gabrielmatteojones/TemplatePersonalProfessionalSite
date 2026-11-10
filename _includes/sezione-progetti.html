@@ -1,0 +1,16 @@
+{% assign progetti = site.progetti | sort: "anno" | reverse %}
+{% if progetti.size > 0 %}
+<section class="mb-5" aria-labelledby="h-progetti">
+  <h2 id="h-progetti" class="h3 mb-3">Progetti recenti</h2>
+  <div class="elenco">
+    {% for p in progetti limit: 3 %}
+    <article class="elenco-voce">
+      <h3 class="h5 mb-1"><a href="{{ p.url | relative_url }}">{{ p.title }}</a></h3>
+      <p class="mb-2">{{ p.descrizione }}</p>
+      <p class="mb-0">{% if p.anno %}<span class="testo-secondario">{{ p.anno }}</span> {% endif %}{% for t in p.tag %}<span class="etichetta">{{ t }}</span> {% endfor %}</p>
+    </article>
+    {% endfor %}
+  </div>
+  <p class="mt-3"><a href="{{ '/progetti/' | relative_url }}">Tutti i progetti</a></p>
+</section>
+{% endif %}

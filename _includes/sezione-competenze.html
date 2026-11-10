@@ -1,0 +1,8 @@
+{% if site.competenze.size > 0 %}
+<section class="mb-5" aria-labelledby="h-competenze">
+  <h2 id="h-competenze" class="h3 mb-3">Competenze</h2>
+  <ul class="list-unstyled d-flex flex-wrap gap-2 mb-0">
+    {% for c in site.competenze %}<li><span class="etichetta">{{ c }}</span></li>{% endfor %}
+  </ul>
+</section>
+{% endif %}

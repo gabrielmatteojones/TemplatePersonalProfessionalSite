@@ -1,0 +1,14 @@
+---
+layout: default
+---
+<nav class="breadcrumb-container" aria-label="Percorso di navigazione"><ol class="breadcrumb">
+  <li class="breadcrumb-item"><a href="{{ '/' | relative_url }}">Home</a><span class="separator" aria-hidden="true">/</span></li>
+  <li class="breadcrumb-item"><a href="{{ '/articoli/' | relative_url }}">Articoli</a><span class="separator" aria-hidden="true">/</span></li>
+  <li class="breadcrumb-item active" aria-current="page">{{ page.title }}</li>
+</ol></nav>
+<article>
+  <h1 class="titolo-pagina mb-3">{{ page.title }}</h1>
+  <p class="testo-secondario mb-4">{% include data.html data=page.date %}{% for t in page.tag %} <span class="etichetta">{{ t }}</span>{% endfor %}</p>
+  <div class="contenuto">{{ content }}</div>
+</article>
+<p class="mt-5"><a href="{{ '/articoli/' | relative_url }}">Tutti gli articoli</a></p>

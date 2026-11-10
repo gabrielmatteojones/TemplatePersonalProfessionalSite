@@ -1,0 +1,120 @@
+/* Tema per Bootstrap Italia 2.x: blu istituzionale, angoli netti, accessibilità curata.
+   Caricato dopo bootstrap-italia.min.css. */
+
+:root {
+  --tema-blu: #35618c;
+  --tema-blu-scuro: #274a6e;
+  --tema-blu-barra: #456a9a;
+  --tema-blu-chiaro: #e8eff6;
+  --tema-slim: #cccccc;
+  --tema-nero: #1a1a1a;
+  --tema-bordo: #d9dee3;
+  --tema-testo-secondario: #4a5560;   /* 7:1 su bianco */
+  --tema-focus: #0b1f33;              /* 16:1 su bianco */
+  --bs-primary: #35618c;
+  --bs-primary-rgb: 53, 97, 140;
+  --bs-link-color: #35618c;
+  --bs-link-hover-color: #274a6e;
+  --bs-body-color: #1a1a1a;
+  --bs-border-radius: 2px;
+}
+
+body { color: var(--tema-nero); line-height: 1.5; }
+h1, h2, h3, h4 { font-weight: 700; color: var(--tema-nero); }
+a { color: var(--tema-blu); }
+a:hover { color: var(--tema-blu-scuro); }
+.icon { fill: currentColor; }
+
+/* Link nel contenuto sempre sottolineati: il colore da solo non basta */
+main a:not(.btn):not(.page-link), .it-footer a { text-decoration: underline; text-underline-offset: .18em; }
+main a:not(.btn):not(.page-link):hover { text-decoration-thickness: 2px; }
+
+/* Focus ben visibile su ogni sfondo */
+a:focus-visible, button:focus-visible, .btn:focus-visible,
+.form-control:focus, .form-select:focus, input:focus-visible {
+  outline: 3px solid var(--tema-focus) !important; outline-offset: 2px !important; box-shadow: none !important;
+}
+.form-control:focus, .form-select:focus { border-color: var(--tema-focus) !important; }
+.it-header-navbar-wrapper a:focus-visible, .it-header-navbar-wrapper button:focus-visible,
+.it-footer a:focus-visible { outline-color: #fff !important; }
+
+.skiplinks a { background: #fff; color: var(--tema-nero); font-weight: 700; padding: .75rem 1rem; }
+
+/* ───── Header ───── */
+.it-header-slim-wrapper { background: var(--tema-slim); }
+.it-header-slim-wrapper .navbar-brand,
+.it-header-slim-wrapper a { color: var(--tema-nero); font-weight: 700; font-size: .875rem; }
+.it-header-center-wrapper { background: #fff; }
+.it-header-center-wrapper .it-brand-wrapper a { display: flex; align-items: center; gap: 1.25rem; text-decoration: none; }
+.it-header-center-wrapper .it-brand-wrapper img { width: auto; max-height: 64px; }
+.it-header-center-wrapper .it-brand-title { color: var(--tema-blu); font-weight: 700; font-size: clamp(1.5rem, 1rem + 2vw, 2rem); }
+.it-header-center-wrapper .it-brand-tagline { color: var(--tema-blu); font-weight: 400; font-size: clamp(1rem, .9rem + .5vw, 1.125rem); }
+
+.it-header-navbar-wrapper { background: var(--tema-blu); }
+.it-header-navbar-wrapper .navbar .nav-link { color: #fff; font-weight: 700; min-height: 2.75rem; display: inline-flex; align-items: center; gap: .25rem; }
+.it-header-navbar-wrapper .navbar .nav-link:hover { color: #fff; box-shadow: inset 0 -3px 0 rgba(255,255,255,.6); }
+.it-header-navbar-wrapper .navbar .nav-link.active,
+.it-header-navbar-wrapper .navbar .nav-link[aria-current="page"] { color: #fff; box-shadow: inset 0 -4px 0 #fff; }
+.it-header-navbar-wrapper .navbar .nav-link .icon { width: 1.25rem; height: 1.25rem; }
+.it-header-navbar-wrapper .custom-navbar-toggler { color: #fff; min-width: 2.75rem; min-height: 2.75rem; }
+.it-header-navbar-wrapper .custom-navbar-toggler .icon { width: 1.5rem; height: 1.5rem; }
+.it-header-navbar-wrapper .menu-wrapper { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1rem; }
+.navbar-collapsable .close-menu { min-width: 2.75rem; }
+
+/* Menu mobile: testo scuro su fondo chiaro */
+@media (max-width: 991.98px) {
+  .it-header-navbar-wrapper .navbar .nav-link { color: var(--tema-blu); box-shadow: none; }
+  .it-header-navbar-wrapper .navbar .nav-link.active,
+  .it-header-navbar-wrapper .navbar .nav-link[aria-current="page"] { box-shadow: inset 4px 0 0 var(--tema-blu); }
+  .navbar-collapsable .close-menu { color: var(--tema-blu); }
+}
+
+.opac-navbar-ricerca { display: flex; align-items: stretch; padding: .5rem 1rem; }
+.opac-navbar-ricerca input { flex: 1 1 auto; min-width: 0; min-height: 2.75rem; padding: .35rem .75rem; border: 1px solid #6b7782; border-radius: 0; background: #fff; color: var(--tema-nero); }
+.opac-navbar-ricerca button { width: 2.75rem; border: 0; border-radius: 0; background: var(--tema-nero); color: #fff; }
+.opac-navbar-ricerca button .icon { width: 1.25rem; height: 1.25rem; }
+@media (min-width: 992px) {
+  .opac-navbar-ricerca { margin-left: auto; padding: 0; }
+  .opac-navbar-ricerca input { width: 14rem; border-color: #fff; }
+}
+
+/* ───── Contenuto ───── */
+::placeholder { color: var(--tema-testo-secondario); opacity: 1; }
+.testo-secondario { color: var(--tema-testo-secondario); }
+.titolo-pagina { padding-bottom: .75rem; border-bottom: 8px solid var(--tema-blu-barra); font-size: clamp(1.75rem, 1rem + 3vw, 2.25rem); }
+.hero-obiettivo .lead { max-width: 60ch; }
+.contenuto { max-width: 75ch; }
+.contenuto h2 { margin-top: 2rem; font-size: 1.5rem; }
+
+.btn { border-radius: 2px; font-weight: 600; min-height: 2.75rem; }
+.btn-primary { background: var(--tema-blu); border-color: var(--tema-blu); color: #fff; }
+.btn-primary:hover { background: var(--tema-blu-scuro); border-color: var(--tema-blu-scuro); }
+.btn-cerca { background: var(--tema-nero); color: #fff; border: 0; display: inline-flex; align-items: center; gap: .4rem; }
+.btn-cerca:hover { background: #000; color: #fff; }
+.btn-cerca .icon { width: 1.25rem; height: 1.25rem; }
+
+.opac-form .form-label { font-weight: 600; }
+.opac-form .form-control {
+  border: 1px solid #6b7782; border-radius: 2px; padding: .5rem .75rem; min-height: 2.75rem; height: auto; background-color: #fff;
+}
+.opac-ricerca-riga { display: flex; flex-wrap: wrap; gap: .75rem; align-items: stretch; }
+.opac-ricerca-riga .form-control { flex: 1 1 18rem; max-width: 40rem; }
+
+/* Elenchi di voci (progetti, articoli, risultati) */
+.elenco-voce { padding: 1.25rem 0; border-top: 1px solid var(--tema-bordo); }
+.elenco-voce:first-child { border-top: 3px solid var(--tema-blu-barra); }
+.elenco-voce p { max-width: 75ch; }
+.etichetta {
+  display: inline-block; padding: .1rem .6rem; background: var(--tema-nero); color: #fff;
+  border-left: 4px solid var(--tema-blu-barra); font-size: .875rem;
+}
+
+.it-footer-main { background: var(--tema-blu-scuro); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+@media (forced-colors: active) {
+  .etichetta { border: 1px solid CanvasText; }
+  .titolo-pagina { border-bottom-color: CanvasText; }
+}

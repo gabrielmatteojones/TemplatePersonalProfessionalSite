@@ -1,0 +1,15 @@
+{% if site.posts.size > 0 %}
+<section class="mb-5" aria-labelledby="h-articoli">
+  <h2 id="h-articoli" class="h3 mb-3">Ultimi articoli</h2>
+  <div class="elenco">
+    {% for post in site.posts limit: 3 %}
+    <article class="elenco-voce">
+      <h3 class="h5 mb-1"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+      <p class="mb-1">{{ post.description | default: post.excerpt | strip_html | truncate: 160 }}</p>
+      <p class="testo-secondario mb-0">{% include data.html data=post.date %}</p>
+    </article>
+    {% endfor %}
+  </div>
+  <p class="mt-3"><a href="{{ '/articoli/' | relative_url }}">Tutti gli articoli</a></p>
+</section>
+{% endif %}

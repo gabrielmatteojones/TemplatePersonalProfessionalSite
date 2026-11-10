@@ -1,0 +1,67 @@
+# ───────────────────────── Jekyll ─────────────────────────
+title: "Nome Cognome"                 # tienilo uguale a sito.nome (usato dal feed RSS)
+description: "Sito personale di Nome Cognome"
+lang: it
+url: ""        # es. https://utente.github.io (vuoto in locale)
+baseurl: ""    # es. /repository se il sito sta in una sottocartella
+timezone: Europe/Rome
+permalink: /articoli/:year/:month/:slug/
+plugins: [jekyll-feed, jekyll-sitemap]
+exclude: [Gemfile, Gemfile.lock, README.md, node_modules, vendor]
+collections:
+  progetti:
+    output: true
+    permalink: /progetti/:name/
+defaults:
+  - scope: { path: "", type: posts }
+    values: { layout: post }
+  - scope: { path: "", type: progetti }
+    values: { layout: progetto }
+  - scope: { path: "" }
+    values: { layout: page }
+
+# ───────────────────── Identità del sito ─────────────────────
+sito:
+  nome: "Nome Cognome"
+  ruolo: "Titolo o professione"
+  descrizione: "Progetti, articoli e informazioni su Nome Cognome."
+  logo: "/assets/img/logo.svg"        # lascia vuoto per nessun logo
+  slim: "Sito personale"              # testo della fascia grigia in alto (vuoto = nascosta)
+  slim_url: ""                        # link opzionale della fascia grigia
+
+# ─────────────── Obiettivo del sito (la home) ───────────────
+# Cambia questi valori per cambiare lo scopo del sito senza toccare il codice.
+obiettivo:
+  titolo: "Progetti, idee e appunti di lavoro"
+  descrizione: "Raccolgo qui quello che faccio e quello che imparo. Scrivimi se vuoi collaborare."
+  cta:
+    testo: "Guarda i progetti"
+    url: "/progetti/"
+  # Sezioni mostrate in home, nell'ordine indicato: progetti, articoli, competenze
+  sezioni_home: [progetti, articoli, competenze]
+
+# ───────────────────────── Header ─────────────────────────
+header:
+  ricerca: true                       # campo di ricerca nella barra blu
+  contatti_etichetta: "Contatti"      # menu a tendina con i link di "social"
+
+menu:
+  - titolo: Progetti
+    url: /progetti/
+  - titolo: Articoli
+    url: /articoli/
+  - titolo: Chi sono
+    url: /chi-sono/
+  # Esempio di sottomenu:
+  # - titolo: Risorse
+  #   figli:
+  #     - { titolo: Libri, url: /libri/ }
+
+social:
+  - { nome: "Email", url: "mailto:nome@example.it", icona: mail }
+  - { nome: "GitHub", url: "https://github.com/utente", icona: link }
+
+competenze: [Scrittura tecnica, Progettazione, Accessibilità web, Ricerca]
+
+footer:
+  testo: "Realizzato con Jekyll e Bootstrap Italia."

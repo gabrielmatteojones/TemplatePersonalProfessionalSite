@@ -1,0 +1,17 @@
+---
+layout: page
+title: Progetti
+permalink: /progetti/
+---
+{% assign progetti = site.progetti | sort: "anno" | reverse %}
+<div class="elenco">
+{% for p in progetti %}
+  <article class="elenco-voce">
+    <h2 class="h5 mb-1"><a href="{{ p.url | relative_url }}">{{ p.title }}</a></h2>
+    <p class="mb-2">{{ p.descrizione }}</p>
+    <p class="mb-0">{% if p.anno %}<span class="testo-secondario">{{ p.anno }}</span> {% endif %}{% for t in p.tag %}<span class="etichetta">{{ t }}</span> {% endfor %}</p>
+  </article>
+{% else %}
+  <p>Nessun progetto pubblicato.</p>
+{% endfor %}
+</div>

@@ -1,0 +1,48 @@
+---
+layout: page
+title: Cerca
+permalink: /cerca/
+search: false
+---
+<form class="opac-form mb-4" role="search" aria-label="Cerca nel sito" id="form-cerca">
+  <label class="form-label" for="q">Cerca nel sito</label>
+  <div class="opac-ricerca-riga">
+    <input type="search" class="form-control" id="q" name="q" autocomplete="off">
+    <button class="btn btn-cerca" type="submit">{% include icon.html name="search" %}Cerca</button>
+  </div>
+</form>
+<p id="esito" role="status" aria-live="polite"></p>
+<div class="elenco" id="risultati"></div>
+<script>
+(function () {
+  var input = document.getElementById('q');
+  var esito = document.getElementById('esito');
+  var lista = document.getElementById('risultati');
+  var voci = [];
+  input.value = new URLSearchParams(location.search).get('q') || '';
+
+  function cerca() {
+    var termini = input.value.toLowerCase().split(/\s+/).filter(Boolean);
+    lista.textContent = '';
+    if (!termini.length) { esito.textContent = ''; return; }
+    var trovati = voci.filter(function (v) {
+      var t = (v.titolo + ' ' + v.testo).toLowerCase();
+      return termini.every(function (w) { return t.indexOf(w) !== -1; });
+    });
+    esito.textContent = trovati.length === 1 ? '1 risultato' : trovati.length + ' risultati';
+    trovati.forEach(function (v) {
+      var art = document.createElement('article'); art.className = 'elenco-voce';
+      var h = document.createElement('h2'); h.className = 'h5 mb-1';
+      var a = document.createElement('a'); a.href = v.url; a.textContent = v.titolo;
+      var p = document.createElement('p'); p.className = 'mb-0'; p.textContent = v.testo.slice(0, 160);
+      h.appendChild(a); art.appendChild(h); art.appendChild(p); lista.appendChild(art);
+    });
+  }
+
+  document.getElementById('form-cerca').addEventListener('submit', function (e) { e.preventDefault(); cerca(); });
+  input.addEventListener('input', cerca);
+  fetch('{{ "/search.json" | relative_url }}').then(function (r) { return r.json(); })
+    .then(function (d) { voci = d; cerca(); })
+    .catch(function () { esito.textContent = 'La ricerca non è disponibile al momento.'; });
+})();
+</script>

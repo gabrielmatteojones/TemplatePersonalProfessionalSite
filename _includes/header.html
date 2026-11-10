@@ -1,0 +1,79 @@
+<div class="skiplinks"><a class="visually-hidden-focusable" href="#main">Vai al contenuto</a></div>
+
+<header class="it-header-wrapper">
+  {% if site.sito.slim != blank %}
+  <div class="it-header-slim-wrapper">
+    <div class="container"><div class="row"><div class="col-12"><div class="it-header-slim-wrapper-content">
+      {% if site.sito.slim_url != blank %}<a class="navbar-brand" href="{{ site.sito.slim_url }}">{{ site.sito.slim }}</a>
+      {% else %}<span class="navbar-brand">{{ site.sito.slim }}</span>{% endif %}
+    </div></div></div></div>
+  </div>
+  {% endif %}
+
+  <div class="it-nav-wrapper">
+    <div class="it-header-center-wrapper"><div class="container"><div class="row"><div class="col-12"><div class="it-header-center-content-wrapper">
+      <div class="it-brand-wrapper">
+        <a href="{{ '/' | relative_url }}">
+          {% if site.sito.logo != blank %}<img src="{{ site.sito.logo | relative_url }}" alt="" height="64">{% endif %}
+          <div class="it-brand-text">
+            <div class="it-brand-title">{{ site.sito.nome }}</div>
+            {% if site.sito.ruolo != blank %}<div class="it-brand-tagline">{{ site.sito.ruolo }}</div>{% endif %}
+          </div>
+        </a>
+      </div>
+    </div></div></div></div></div>
+
+    <div class="it-header-navbar-wrapper"><div class="container"><div class="row"><div class="col-12">
+      <nav class="navbar navbar-expand-lg has-megamenu" aria-label="Navigazione principale">
+        <button class="custom-navbar-toggler" type="button" aria-controls="nav" aria-expanded="false" aria-label="Apri il menu" data-bs-toggle="navbarcollapsible" data-bs-target="#nav">{% include icon.html name="burger" %}</button>
+        <div class="navbar-collapsable" id="nav">
+          <div class="overlay"></div>
+          <div class="close-div"><button class="btn close-menu" type="button"><span class="visually-hidden">Chiudi il menu</span>{% include icon.html name="close" %}</button></div>
+          <div class="menu-wrapper">
+
+            <ul class="navbar-nav">
+              {% for voce in site.menu %}
+                {% assign attivo = false %}
+                {% if voce.url == page.url or voce.url != '/' and voce.url != blank and page.url contains voce.url %}{% assign attivo = true %}{% endif %}
+                {% if voce.figli %}
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false"><span>{{ voce.titolo }}</span>{% include icon.html name="expand" %}</a>
+                  <div class="dropdown-menu"><div class="link-list-wrapper"><ul class="link-list">
+                    {% for f in voce.figli %}
+                    <li><a class="dropdown-item list-item" href="{{ f.url | relative_url }}"{% if f.url == page.url %} aria-current="page"{% endif %}><span>{{ f.titolo }}</span></a></li>
+                    {% endfor %}
+                  </ul></div></div>
+                </li>
+                {% else %}
+                <li class="nav-item"><a class="nav-link{% if attivo %} active{% endif %}" href="{% if voce.url contains '://' %}{{ voce.url }}{% else %}{{ voce.url | relative_url }}{% endif %}"{% if attivo %} aria-current="page"{% endif %}><span>{{ voce.titolo }}</span></a></li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+
+            {% if site.header.ricerca %}
+            <form class="opac-navbar-ricerca" role="search" aria-label="Ricerca rapida" action="{{ '/cerca/' | relative_url }}" method="get">
+              <label for="q-nav" class="visually-hidden">Cerca nel sito</label>
+              <input id="q-nav" name="q" type="search" placeholder="Cerca nel sito">
+              <button type="submit" aria-label="Cerca">{% include icon.html name="search" %}</button>
+            </form>
+            {% endif %}
+
+            {% if site.social.size > 0 %}
+            <ul class="navbar-nav">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false"><span>{{ site.header.contatti_etichetta | default: "Contatti" }}</span>{% include icon.html name="expand" %}</a>
+                <div class="dropdown-menu dropdown-menu-end"><div class="link-list-wrapper"><ul class="link-list">
+                  {% for s in site.social %}
+                  <li><a class="dropdown-item list-item" href="{{ s.url }}"><span>{{ s.nome }}</span></a></li>
+                  {% endfor %}
+                </ul></div></div>
+              </li>
+            </ul>
+            {% endif %}
+
+          </div>
+        </div>
+      </nav>
+    </div></div></div></div>
+  </div>
+</header>
